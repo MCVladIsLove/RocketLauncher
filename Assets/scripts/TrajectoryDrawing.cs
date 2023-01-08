@@ -36,11 +36,12 @@ public class TrajectoryDrawing : MonoBehaviour
     public void CalculateTrajectory(Vector3 initialForce)
     {
         SinchronizeClone();
-
         _lineRenderer.positionCount = 1;
         _lineRenderer.SetPosition(0, this.gameObject.transform.position);
 
         _cloneOfThis.GetComponent<Rigidbody>().AddForce(initialForce, ForceMode.Impulse);
+        OnSimulationStep?.Invoke(_cloneOfThis);
+
         _clonedScenePhysics.Simulate(Time.fixedDeltaTime);
 
         for (int i = 1; i < _stepsToSimulate; i++)
@@ -56,14 +57,12 @@ public class TrajectoryDrawing : MonoBehaviour
     {
         _cloneOfThis.transform.position = gameObject.transform.position;
         _cloneOfThis.transform.rotation = gameObject.transform.rotation;
-        
-       // _cloneOfThis.GetComponent<Rigidbody>().position = GetComponent<Rigidbody>().position;
-       // _cloneOfThis.GetComponent<Rigidbody>(). = GetComponent<Rigidbody>();
+        // _cloneOfThis.GetComponent<Rigidbody>(). = GetComponent<Rigidbody>();
 
-      //  Debug.Log("clone");
-       // Debug.Log(_cloneOfThis.GetComponent<Rigidbody>().position);
-      //  Debug.Log("go");
-      //  Debug.Log(gameObject.GetComponent<Rigidbody>().position);
+        //  Debug.Log("clone");
+        // Debug.Log(_cloneOfThis.GetComponent<Rigidbody>().position);
+        //  Debug.Log("go");
+        //  Debug.Log(gameObject.GetComponent<Rigidbody>().position);
         _cloneOfThis.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity;
     }
 
