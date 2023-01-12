@@ -9,6 +9,7 @@ public class GravityManagement : MonoBehaviour
     List<GameObject> _gravityObjects;
     public List<GameObject> GravityObjects => _gravityObjects;
 
+    [SerializeField] float _minDistanceClampBorder = 3; // too low distance causes very high force pulling objects far away
     void Awake()
     {
         if (Instance && Instance != this)
@@ -27,6 +28,7 @@ public class GravityManagement : MonoBehaviour
         {
             float distance = (pullTo.transform.position - go.transform.position).magnitude;
             Vector3 direction = (pullTo.transform.position - go.transform.position).normalized;
+            distance = Mathf.Clamp(distance, _minDistanceClampBorder, distance);
             float force = pulled.mass * to.mass / (distance * distance);
             pulled.AddForce(direction * force, ForceMode.Force);
         }

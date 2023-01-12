@@ -11,6 +11,8 @@ public class TrajectoryDrawing : MonoBehaviour
     PhysicsScene _clonedScenePhysics;
     Scene _clonedScene;
     GameObject _cloneOfThis;
+    Rigidbody _cloneRb;
+    Rigidbody _originalRb;
     LineRenderer _lineRenderer;
     readonly string _hiddenSceneName = "Hidden scene for Trajectories";
 
@@ -22,6 +24,7 @@ public class TrajectoryDrawing : MonoBehaviour
     private void Start()
     {
         CreateScene();
+        _originalRb = GetComponent<Rigidbody>();
         SetClone();
         _lineRenderer = GetComponent<LineRenderer>();
         SceneManager.MoveGameObjectToScene(_cloneOfThis, _clonedScene);
@@ -39,7 +42,7 @@ public class TrajectoryDrawing : MonoBehaviour
         _lineRenderer.positionCount = 1;
         _lineRenderer.SetPosition(0, this.gameObject.transform.position);
 
-        _cloneOfThis.GetComponent<Rigidbody>().AddForce(initialForce, ForceMode.Impulse);
+        _cloneRb.AddForce(initialForce, ForceMode.Impulse);
         OnSimulationStep?.Invoke(_cloneOfThis);
 
         _clonedScenePhysics.Simulate(Time.fixedDeltaTime);
@@ -57,13 +60,7 @@ public class TrajectoryDrawing : MonoBehaviour
     {
         _cloneOfThis.transform.position = gameObject.transform.position;
         _cloneOfThis.transform.rotation = gameObject.transform.rotation;
-        // _cloneOfThis.GetComponent<Rigidbody>(). = GetComponent<Rigidbody>();
-
-        //  Debug.Log("clone");
-        // Debug.Log(_cloneOfThis.GetComponent<Rigidbody>().position);
-        //  Debug.Log("go");
-        //  Debug.Log(gameObject.GetComponent<Rigidbody>().position);
-        _cloneOfThis.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity;
+        _cloneRb.velocity = _originalRb.velocity;
     }
 
     void CreateScene()
@@ -81,9 +78,10 @@ public class TrajectoryDrawing : MonoBehaviour
         _cloneOfThis = new GameObject(gameObject.name + "_trajectory");
         _cloneOfThis.transform.position = gameObject.transform.position;
         _cloneOfThis.transform.rotation = gameObject.transform.rotation;
-        _cloneOfThis.AddComponent<Rigidbody>().mass = GetComponent<Rigidbody>().mass;
-        _cloneOfThis.GetComponent<Rigidbody>().isKinematic = false;
-        _cloneOfThis.GetComponent<Rigidbody>().useGravity = false;
+        _cloneRb = _cloneOfThis.AddComponent<Rigidbody>();
+        _cloneRb.mass = _originalRb.mass;
+        _cloneRb.isKinematic = false;
+        _cloneRb.useGravity = false;
     }
 
 }

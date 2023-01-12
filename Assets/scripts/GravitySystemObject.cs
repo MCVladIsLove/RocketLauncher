@@ -9,6 +9,7 @@ public class GravitySystemObject : MonoBehaviour
 {
     [SerializeField] Vector3 _startForceDirection;
     [SerializeField] bool _pullable;
+    [SerializeField] Rigidbody _rotateAroundGameObject;
     public bool Pullable { get { return _pullable; } 
         set { if (gameObject.GetComponent<Rigidbody>()) _pullable = value; } }
 
@@ -24,7 +25,13 @@ public class GravitySystemObject : MonoBehaviour
         _gravityObjects = _gravityManager.GravityObjects;
         _gravityObjects.Add(this.gameObject);
         _rb = GetComponent<Rigidbody>();
-        _rb.AddForce(_startForceDirection, ForceMode.Impulse);
+        /*if (_rotateAroundGameObject)
+        {
+            (_rotateAroundGameObject.position - _rb.position).normali
+            _rb.AddForce();
+        }
+        else
+ */           _rb.AddForce(_startForceDirection, ForceMode.Impulse);
     }
 
     void FixedUpdate()
