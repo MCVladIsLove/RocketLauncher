@@ -25,13 +25,19 @@ public class GravitySystemObject : MonoBehaviour
         _gravityObjects = _gravityManager.GravityObjects;
         _gravityObjects.Add(this.gameObject);
         _rb = GetComponent<Rigidbody>();
-        /*if (_rotateAroundGameObject)
+        if (_rotateAroundGameObject)
         {
-            (_rotateAroundGameObject.position - _rb.position).normali
-            _rb.AddForce();
+            Vector3 perpendicular = (_rotateAroundGameObject.position - _rb.position).normalized;
+            perpendicular = new Vector3(-perpendicular.y, perpendicular.x);
+            perpendicular = Random.Range(0, 2) == 1 ? perpendicular : -perpendicular;
+            float force = _gravityManager.GetForceBetween(_rb, _rotateAroundGameObject);
+            float distance = (_rb.position - _rotateAroundGameObject.position).magnitude;
+            float velocity = Mathf.Sqrt(force * distance / _rb.mass);
+
+            _rb.AddForce(perpendicular * velocity, ForceMode.VelocityChange); // ТУТ НАДО ДДОДЕЛЫВАТЬ
         }
         else
- */           _rb.AddForce(_startForceDirection, ForceMode.Impulse);
+            _rb.AddForce(_startForceDirection, ForceMode.Impulse);
     }
 
     void FixedUpdate()

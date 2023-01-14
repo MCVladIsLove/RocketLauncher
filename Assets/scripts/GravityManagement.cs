@@ -22,14 +22,10 @@ public class GravityManagement : MonoBehaviour
 
     public void Pull(Rigidbody pulled, Rigidbody to)
     {
-        GameObject go = pulled.gameObject;
-        GameObject pullTo = to.gameObject;
-        if (Vector3.Distance(go.transform.position, to.transform.position) > 1)
+        if (Vector3.Distance(pulled.position, to.position) > 1)
         {
-            float distance = (pullTo.transform.position - go.transform.position).magnitude;
-            Vector3 direction = (pullTo.transform.position - go.transform.position).normalized;
-            distance = Mathf.Clamp(distance, _minDistanceClampBorder, distance);
-            float force = pulled.mass * to.mass / (distance * distance);
+            Vector3 direction = (to.position - pulled.position).normalized;
+            float force = GetForceBetween(pulled, to);
             pulled.AddForce(direction * force, ForceMode.Force);
         }
     }
@@ -60,5 +56,12 @@ public class GravityManagement : MonoBehaviour
         }
     }
 
+    public float GetForceBetween(Rigidbody pulled, Rigidbody to)
+    {
+        float distance = (pulled.position - to.position).magnitude;
+        distance = Mathf.Clamp(distance, _minDistanceClampBorder, distance);
+
+        return pulled.mass * to.mass / (distance * distance);
+    }
 
 }

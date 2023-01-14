@@ -60,6 +60,7 @@ public class TrajectoryDrawing : MonoBehaviour
     {
         _cloneOfThis.transform.position = gameObject.transform.position;
         _cloneOfThis.transform.rotation = gameObject.transform.rotation;
+        _cloneRb.position = _originalRb.position;
         _cloneRb.velocity = _originalRb.velocity;
     }
 
