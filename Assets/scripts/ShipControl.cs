@@ -12,6 +12,7 @@ public class ShipControl : MonoBehaviour
     float _camToCubeDistance;
     Rigidbody _rb;
     TrajectoryDrawing _trajectory;
+
     void Start()
     {
         _trajectory = GetComponent<TrajectoryDrawing>();
@@ -36,26 +37,13 @@ public class ShipControl : MonoBehaviour
          } */
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            _fingerStartPos = _cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, _camToCubeDistance));
-            _tmpIsHeld = true;
-        }
-
-
+            TouchStart();
+        
         if (_tmpIsHeld)
-        {
-            Vector3 touchPos = _cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, _camToCubeDistance));
-            _trajectory.CalculateTrajectory(new Vector3((_fingerStartPos.x - touchPos.x), (_fingerStartPos.y - touchPos.y), 0));
-        }
-
+            WhileTouch();
 
         if (Input.GetKeyUp(KeyCode.Mouse0))
-        {
-            _rb.isKinematic = false;
-            Vector3 touchPos = _cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, _camToCubeDistance));
-            _rb.AddForce((_fingerStartPos.x - touchPos.x), (_fingerStartPos.y - touchPos.y), 0, ForceMode.Impulse);
-            _tmpIsHeld = false;
-        }
+            ReleaseTouch();
     }
 
     
@@ -64,4 +52,38 @@ public class ShipControl : MonoBehaviour
         GravityManagement.Instance.PullToAll(cloneOfThis.GetComponent<Rigidbody>());
     }
 
+    private void TouchStart()
+    {
+        _fingerStartPos = GetTouchWorldPoint();
+        _tmpIsHeld = true;
+    }
+    private void WhileTouch()
+    {
+        Vector3 touchPos = GetTouchWorldPoint();
+        Vector3 direction = GetFingerPullDirection(touchPos);
+        transform.parent?.LookAt(direction + transform.parent.position, Vector3.down); //Тут надо по красоте
+        _trajectory.CalculateTrajectory(direction);
+    }
+    private void ReleaseTouch()
+    {
+        LaunchRocket();
+        _trajectory.ClearTrajectory();
+        _tmpIsHeld = false;
+    }
+    private Vector3 GetTouchWorldPoint()
+    {
+        return _cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, _camToCubeDistance));
+    }
+
+    private Vector3 GetFingerPullDirection(Vector3 touchPos)
+    {
+        return new Vector3((_fingerStartPos.x - touchPos.x), (_fingerStartPos.y - touchPos.y), 0);
+    }
+    private void LaunchRocket()
+    {
+        Landable landing = GetComponentInParent<Landable>();
+        landing?.Release();
+        Vector3 touchPos = GetTouchWorldPoint();
+        _rb.AddForce(GetFingerPullDirection(touchPos), ForceMode.Impulse);
+    }
 }

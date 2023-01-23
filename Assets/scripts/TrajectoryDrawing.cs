@@ -85,4 +85,9 @@ public class TrajectoryDrawing : MonoBehaviour
         _cloneRb.useGravity = false;
     }
 
+    public void ClearTrajectory()
+    {
+        _lineRenderer.positionCount = 0;
+    }
+
 }

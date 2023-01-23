@@ -33,8 +33,8 @@ public class GravitySystemObject : MonoBehaviour
             float force = _gravityManager.GetForceBetween(_rb, _rotateAroundGameObject);
             float distance = (_rb.position - _rotateAroundGameObject.position).magnitude;
             float velocity = Mathf.Sqrt(force * distance / _rb.mass);
-
-            _rb.AddForce(perpendicular * velocity, ForceMode.VelocityChange); // ТУТ НАДО ДДОДЕЛЫВАТЬ
+            
+            _rb.AddForce(perpendicular * velocity, ForceMode.VelocityChange);
         }
         else
             _rb.AddForce(_startForceDirection, ForceMode.Impulse);
