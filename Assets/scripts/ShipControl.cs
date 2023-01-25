@@ -61,7 +61,8 @@ public class ShipControl : MonoBehaviour
     {
         Vector3 touchPos = GetTouchWorldPoint();
         Vector3 direction = GetFingerPullDirection(touchPos);
-        transform.parent?.LookAt(direction + transform.parent.position, Vector3.down); //Тут надо по красоте
+        if (transform.parent)
+            transform.parent.up = direction;
         _trajectory.CalculateTrajectory(direction);
     }
     private void ReleaseTouch()

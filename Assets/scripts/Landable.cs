@@ -7,6 +7,7 @@ public class Landable : MonoBehaviour
     [SerializeField] GameObject _attached;
     Rigidbody _attachedRb;
     RigidbodyConstraints _nativeFreeze;
+    
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player" && !_attached)
@@ -18,12 +19,13 @@ public class Landable : MonoBehaviour
                 return;
             }
 
+            Vector3 directionLandingToOtherGo = _attached.transform.position - transform.position;
+            transform.up = directionLandingToOtherGo;
             _attachedRb = _attached.GetComponent<Rigidbody>();
             _nativeFreeze = _attachedRb.constraints;
             _attached.transform.SetParent(transform);
             _attachedRb.constraints = RigidbodyConstraints.FreezeAll;
-            _attached.transform.LookAt(transform, Vector3.back); //???? Мб не так
-            _attached.transform.Rotate(Vector3.forward, Mathf.PI);
+            _attached.transform.up = directionLandingToOtherGo;
         }
     }
     public void Release()
