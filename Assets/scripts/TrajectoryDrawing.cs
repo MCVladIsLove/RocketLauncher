@@ -27,7 +27,7 @@ public class TrajectoryDrawing : MonoBehaviour
         _originalRb = GetComponent<Rigidbody>();
         SetClone();
         _lineRenderer = GetComponent<LineRenderer>();
-        SceneManager.MoveGameObjectToScene(_cloneOfThis, _clonedScene);
+        SceneManager.MoveGameObjectToScene(_cloneOfThis, _clonedScene);        
     }
 
     void Update()

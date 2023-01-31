@@ -47,7 +47,7 @@ public class ShipControl : MonoBehaviour
     }
 
     
-    public void TrajecorySimulationStep(GameObject cloneOfThis)
+    public void TrajectorySimulationStep(GameObject cloneOfThis)
     {
         GravityManagement.Instance.PullToAll(cloneOfThis.GetComponent<Rigidbody>());
     }

@@ -17,13 +17,13 @@ public class GravitySystemObject : MonoBehaviour
     public bool Magnetic { get { return _magnetic; } set { _magnetic = value; } }
 
     GravityManagement _gravityManager;
-    List<GameObject> _gravityObjects;
+    List<GravitySystemObject> _gravityObjects;
     Rigidbody _rb;
     void Start()
     {
         _gravityManager = GravityManagement.Instance;
         _gravityObjects = _gravityManager.GravityObjects;
-        _gravityObjects.Add(this.gameObject);
+        _gravityObjects.Add(GetComponent<GravitySystemObject>());
         _rb = GetComponent<Rigidbody>();
         if (_rotateAroundGameObject)
         {
