@@ -46,9 +46,4 @@ public class GravitySystemObject : MonoBehaviour
             _gravityManager.MagnetizeAll(_rb);
     }
 
-    public void TrajectorySimulationStep(GameObject clonedObject)
-    {
-        _gravityManager.PullToAll(clonedObject.GetComponent<Rigidbody>());
-    }
-
 }

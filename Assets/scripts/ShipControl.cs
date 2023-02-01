@@ -46,12 +46,6 @@ public class ShipControl : MonoBehaviour
             ReleaseTouch();
     }
 
-    
-    public void TrajectorySimulationStep(GameObject cloneOfThis)
-    {
-        GravityManagement.Instance.PullToAll(cloneOfThis.GetComponent<Rigidbody>());
-    }
-
     private void TouchStart()
     {
         _fingerStartPos = GetTouchWorldPoint();
