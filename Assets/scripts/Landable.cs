@@ -26,6 +26,7 @@ public class Landable : MonoBehaviour
             _attached.transform.SetParent(transform);
             _attachedRb.constraints = RigidbodyConstraints.FreezeAll;
             _attached.transform.up = directionLandingToOtherGo;
+            FocusCamera();
         }
     }
     public void Release()
@@ -33,5 +34,10 @@ public class Landable : MonoBehaviour
         _attachedRb.constraints = _nativeFreeze;
         _attached.transform.parent = null;
         _attached = null;
+    }
+
+    void FocusCamera()
+    {
+        CameraInstance.mainCam.GetComponent<CameraMovement>().SetFollow(transform);
     }
 }
