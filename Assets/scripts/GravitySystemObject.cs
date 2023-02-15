@@ -17,20 +17,18 @@ public class GravitySystemObject : MonoBehaviour
     public bool Magnetic { get { return _magnetic; } set { _magnetic = value; } }
 
     GravityManagement _gravityManager;
-    List<GravitySystemObject> _gravityObjects;
     Rigidbody _rb;
     void Start()
     {
         _gravityManager = GravityManagement.Instance;
-        _gravityObjects = _gravityManager.GravityObjects;
-        _gravityObjects.Add(GetComponent<GravitySystemObject>());
+        EnableGravitation(_pullable, _magnetic);
         _rb = GetComponent<Rigidbody>();
         if (_rotateAroundGameObject)
         {
             Vector3 perpendicular = (_rotateAroundGameObject.position - _rb.position).normalized;
             perpendicular = new Vector3(-perpendicular.y, perpendicular.x);
             perpendicular = Random.Range(0, 2) == 1 ? perpendicular : -perpendicular;
-            float force = _gravityManager.GetForceBetween(_rb, _rotateAroundGameObject);
+            float force = GravityManagementUtils.GetForceBetween(_rb, _rotateAroundGameObject, true);
             float distance = (_rb.position - _rotateAroundGameObject.position).magnitude;
             float velocity = Mathf.Sqrt(force * distance / _rb.mass);
             
@@ -46,4 +44,17 @@ public class GravitySystemObject : MonoBehaviour
             _gravityManager.MagnetizeAll(_rb);
     }
 
+    public void DisableGravitation()
+    {
+        _gravityManager.RemoveFromGravitySystem(this);
+        _pullable = false;
+        _magnetic = false;
+    }
+
+    public void EnableGravitation(bool pullable, bool magnetic)
+    {
+        _gravityManager.AddToGravitySystem(this);
+        _pullable = pullable;
+        _magnetic = magnetic;
+    }
 }
