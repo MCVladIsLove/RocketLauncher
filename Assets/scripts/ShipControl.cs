@@ -12,7 +12,7 @@ public class ShipControl : MonoBehaviour
     float _camToCubeDistance;
     Rigidbody _rb;
     TrajectoryDrawing _trajectory;
-
+    [SerializeField] float _forceMultiplier;
     void Start()
     {
         _trajectory = GetComponent<TrajectoryDrawing>();
@@ -54,10 +54,10 @@ public class ShipControl : MonoBehaviour
     private void WhileTouch()
     {
         Vector3 touchPos = GetTouchWorldPoint();
-        Vector3 direction = GetFingerPullDirection(touchPos);
+        Vector3 pushForce = GetFingerPullDirection(touchPos) * _forceMultiplier;
         if (transform.parent)
-            transform.parent.up = direction;
-        _trajectory.CalculateTrajectory(direction);
+            transform.parent.up = pushForce;
+        _trajectory.CalculateTrajectory(pushForce);
     }
     private void ReleaseTouch()
     {
@@ -79,6 +79,6 @@ public class ShipControl : MonoBehaviour
         Landable landing = GetComponentInParent<Landable>();
         landing?.Release();
         Vector3 touchPos = GetTouchWorldPoint();
-        _rb.AddForce(GetFingerPullDirection(touchPos), ForceMode.Impulse);
+        _rb.AddForce(GetFingerPullDirection(touchPos) * _forceMultiplier, ForceMode.Impulse);
     }
 }
