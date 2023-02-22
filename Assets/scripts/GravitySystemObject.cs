@@ -10,7 +10,7 @@ public class GravitySystemObject : MonoBehaviour
     [SerializeField] Vector3 _startForceDirection;
     [SerializeField] bool _pullable;
     [SerializeField] Rigidbody _rotateAroundGameObject;
-    public bool Pullable { get { return _pullable; } 
+    public bool Pullable { get { return _pullable; }
         set { if (gameObject.GetComponent<Rigidbody>()) _pullable = value; } }
 
     [SerializeField] bool _magnetic;
@@ -31,7 +31,7 @@ public class GravitySystemObject : MonoBehaviour
             float force = GravityManagementUtils.GetForceBetween(_rb, _rotateAroundGameObject, true);
             float distance = (_rb.position - _rotateAroundGameObject.position).magnitude;
             float velocity = Mathf.Sqrt(force * distance / _rb.mass);
-            
+
             _rb.AddForce(perpendicular * velocity, ForceMode.VelocityChange);
         }
         else
@@ -57,4 +57,10 @@ public class GravitySystemObject : MonoBehaviour
         _pullable = pullable;
         _magnetic = magnetic;
     }
+
+    void OnDestroy()
+    {
+        DisableGravitation();
+    }
+
 }

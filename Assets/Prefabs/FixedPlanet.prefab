@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3269253732100358382}
   - component: {fileID: 3269253732100358383}
   - component: {fileID: 3269253732100358380}
-  - component: {fileID: 3269253732100358381}
   - component: {fileID: 3269253732100358370}
   - component: {fileID: 3269253732100358371}
+  - component: {fileID: -7483863633899312729}
   m_Layer: 0
   m_Name: FixedPlanet
   m_TagString: Untagged
@@ -98,22 +98,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3269253732100358381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3269253732100358368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e64c86c3739baf41ad8d7244025dce1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _startForceDirection: {x: 4200, y: 3000, z: 0}
-  _pullable: 1
-  _rotateAroundGameObject: {fileID: 0}
-  _magnetic: 0
 --- !u!54 &3269253732100358370
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -143,3 +127,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attached: {fileID: 0}
+--- !u!114 &-7483863633899312729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3269253732100358368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cafad018af15faf41a42d2301e6abaf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
