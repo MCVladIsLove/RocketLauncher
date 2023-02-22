@@ -6,6 +6,13 @@ public class CreatableDestroyable : MonoBehaviour
 {
     public void RemoveObject()
     {
-        Destroy(this);
+        StartCoroutine(DestroyMyself());
     }
+    IEnumerator DestroyMyself()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+        Destroy(gameObject);
+    }
+
+
 }
