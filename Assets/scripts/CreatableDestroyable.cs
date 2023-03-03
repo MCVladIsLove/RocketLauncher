@@ -13,6 +13,4 @@ public class CreatableDestroyable : MonoBehaviour
         yield return new WaitForSecondsRealtime(2f);
         Destroy(gameObject);
     }
-
-
 }
