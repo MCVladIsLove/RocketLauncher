@@ -8,10 +8,10 @@ public class Game : MonoBehaviour
     LevelCleaner _lvlCleaner;
     LevelGenerator _lvlGenerator;
     CameraMovement _camMovement;
-
+    Transform _highestPlanet;
+    GeneratorTrigger _generatorTrigger;
 
     float _bottomPlaySpaceY;
-    float _topPlaySpaceY;
     float _playSpaceHeight;
     float _playSpaceWidth;
     float _camToPlaySpaceDistance;
@@ -29,18 +29,21 @@ public class Game : MonoBehaviour
         else
             Instance = this;
 
+        _generatorTrigger = FindObjectOfType<GeneratorTrigger>();
+
         _camMovement = CameraInstance.mainCam.GetComponent<CameraMovement>();
         _camToPlaySpaceDistance = Mathf.Abs(CameraInstance.mainCam.transform.position.z);
 
         _bottomPlaySpaceY = CameraInstance.mainCam.ScreenToWorldPoint(new Vector3(0, 0, _camToPlaySpaceDistance)).y;
-        _topPlaySpaceY = CameraInstance.mainCam.ScreenToWorldPoint(new Vector3(0, CameraInstance.mainCam.scaledPixelHeight, _camToPlaySpaceDistance)).y;
-        _playSpaceHeight = _topPlaySpaceY - _bottomPlaySpaceY;
+        float topY = CameraInstance.mainCam.ScreenToWorldPoint(new Vector3(0, CameraInstance.mainCam.scaledPixelHeight, _camToPlaySpaceDistance)).y;
+        _playSpaceHeight = topY - _bottomPlaySpaceY;
+        _playSpaceWidth = CameraInstance.mainCam.ScreenToWorldPoint(new Vector3(CameraInstance.mainCam.scaledPixelWidth, 0, _camToPlaySpaceDistance)).x - CameraInstance.mainCam.ScreenToWorldPoint(new Vector3(0, 0, _camToPlaySpaceDistance)).x;
 
         _levelObjects = GetLevelObjects();
         _lvlCleaner = new LevelCleaner(_levelObjects);
-        _lvlGenerator = new LevelGenerator();
-        _lvlGenerator.GenerateLevel();
+        _lvlGenerator = new LevelGenerator(_camMovement);
 
+        _highestPlanet = GetHighestPlanet();
     }
 
     void Update()
@@ -54,4 +57,33 @@ public class Game : MonoBehaviour
         return new List<CreatableDestroyable>(FindObjectsOfType<CreatableDestroyable>());
     }
 
+    public void CallGenerator()
+    {
+        Vector3 newGeneratorPosition = _highestPlanet.transform.position - Vector3.up * _highestPlanet.transform.lossyScale.y;
+        _generatorTrigger.MoveTo(newGeneratorPosition);
+        _highestPlanet = _lvlGenerator.GenerateLevel(_highestPlanet);
+    }
+
+    private Transform GetHighestPlanet()
+    {
+        if (_levelObjects.Count < 0)
+            return null;
+
+        GameObject highest = _levelObjects[0].gameObject;
+        foreach (CreatableDestroyable cd in _levelObjects)
+            if (cd.transform.position.y > highest.transform.position.y)
+                highest = cd.gameObject;
+
+        return highest.transform;
+    }
+
+    public void AddLevelObject(CreatableDestroyable obj)
+    {
+        _levelObjects.Add(obj);
+    }
+    public void RemoveLevelObject(CreatableDestroyable obj)
+    {
+        _levelObjects.Remove(obj);
+    }
 }
+
