@@ -10,11 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e1ca4de922603d4daf979c64c7c035b, type: 3}
-  m_Name: 2
+  m_Name: 4
   m_EditorClassIdentifier: 
   _leftZoneObjects:
-  - {fileID: 3269253732100358368, guid: 87fbd5a92dc31fa4f874c4fb6d3585e2, type: 3}
+  - {fileID: 0}
+  - {fileID: 2752391527869845638, guid: 530f5d590717d9b4396f65364f91c71c, type: 3}
   _rightZoneObjects:
   - {fileID: 0}
   - {fileID: 2752391527869845638, guid: 530f5d590717d9b4396f65364f91c71c, type: 3}
-  _middleZoneObjects: []
+  _middleZoneObjects:
+  - {fileID: 3269253732100358368, guid: 87fbd5a92dc31fa4f874c4fb6d3585e2, type: 3}
+  - {fileID: 0}
+  - {fileID: 2752391527869845638, guid: 530f5d590717d9b4396f65364f91c71c, type: 3}

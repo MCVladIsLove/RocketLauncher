@@ -60,7 +60,8 @@ public class GravitySystemObject : MonoBehaviour
 
     void OnDestroy()
     {
-        DisableGravitation();
+        if (_gravityManager != null)
+            DisableGravitation();
     }
 
 }

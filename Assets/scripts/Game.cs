@@ -16,7 +16,11 @@ public class Game : MonoBehaviour
     float _playSpaceWidth;
     float _camToPlaySpaceDistance;
 
+    [SerializeField] float _minVerticalSpaceBetweenObjects;
+    [SerializeField] float _minHorizontalSpaceBetweenObjects;
+
     public float BottomPlaySpaceY { get { return _bottomPlaySpaceY; } }
+    public float TopPlaySpaceY { get { return _bottomPlaySpaceY + _playSpaceHeight; } }
     public float PlaySpaceHeight { get { return _playSpaceHeight; } }
     public float PlaySpaceWidth { get { return _playSpaceWidth; } }
 
@@ -41,9 +45,10 @@ public class Game : MonoBehaviour
 
         _levelObjects = GetLevelObjects();
         _lvlCleaner = new LevelCleaner(_levelObjects);
-        _lvlGenerator = new LevelGenerator(_camMovement);
+        _lvlGenerator = new LevelGenerator(_minVerticalSpaceBetweenObjects, _minHorizontalSpaceBetweenObjects, _camMovement);
 
         _highestPlanet = GetHighestPlanet();
+
     }
 
     void Update()
