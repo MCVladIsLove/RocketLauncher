@@ -48,7 +48,7 @@ public class Game : MonoBehaviour
         _lvlGenerator = new LevelGenerator(_minVerticalSpaceBetweenObjects, _minHorizontalSpaceBetweenObjects, _camMovement);
 
         _highestPlanet = GetHighestPlanet();
-
+        _highestPlanet.GetComponent<FocusedByCam>().AllowFocus();
     }
 
     void Update()
@@ -67,6 +67,7 @@ public class Game : MonoBehaviour
         Vector3 newGeneratorPosition = _highestPlanet.transform.position - Vector3.up * _highestPlanet.transform.lossyScale.y;
         _generatorTrigger.MoveTo(newGeneratorPosition);
         _highestPlanet = _lvlGenerator.GenerateLevel(_highestPlanet);
+        _highestPlanet.GetComponent<FocusedByCam>().AllowFocus();
     }
 
     private Transform GetHighestPlanet()
