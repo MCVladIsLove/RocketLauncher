@@ -32,7 +32,6 @@ public class LevelGenerator
 
         return highestPlanet;
     }
-
     GameObject CreateLevelObject(GameObject prefab, Vector3 position)
     {
         GameObject instance = GameObject.Instantiate(prefab, position, Quaternion.identity);
@@ -48,7 +47,7 @@ public class LevelGenerator
             GameObject.Destroy(instance);
             return null;
         }
-        Game.Instance.AddLevelObject(instance.GetComponent<CreatableDestroyable>());
+        Game.Instance.AddLevelObject(instance.GetComponent<CreatableDestroyable>()); 
         return instance;
     }
 

@@ -8,7 +8,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody), typeof(LineRenderer))]
 public class TrajectoryDrawing : MonoBehaviour
 {
-    Rigidbody _rb;
+    GravitySystemObject _gravityObject;
     LineRenderer _lineRenderer;
 
     [SerializeField] bool _simulateManually;
@@ -16,7 +16,7 @@ public class TrajectoryDrawing : MonoBehaviour
 
     private void Start()
     {
-        _rb = GetComponent<Rigidbody>();
+        _gravityObject = GetComponent<GravitySystemObject>();
         _lineRenderer = GetComponent<LineRenderer>();
     }
 
@@ -32,11 +32,11 @@ public class TrajectoryDrawing : MonoBehaviour
         _lineRenderer.SetPosition(0, gameObject.transform.position);
 
         Vector3 nextPos = gameObject.transform.position;
-        Vector3 velocity = _rb.velocity;
+        Vector3 velocity = _gravityObject.Rigidbody.velocity; 
         int i = 1;
         if (initialForce != Vector3.zero)
         {
-            velocity += GravityManagement.Instance.GetVelocityChangeNextPhysicsCall(_rb, nextPos, initialForce);
+            velocity += GravityManagement.Instance.GetVelocityChangeNextPhysicsCall(_gravityObject, nextPos, initialForce);
             nextPos += velocity * Time.fixedDeltaTime;
 
             _lineRenderer.positionCount++;
@@ -46,7 +46,7 @@ public class TrajectoryDrawing : MonoBehaviour
 
         for (; i < _stepsToSimulate; i++)
         {
-            velocity += GravityManagement.Instance.GetVelocityChangeNextPhysicsCall(_rb, nextPos);
+            velocity += GravityManagement.Instance.GetVelocityChangeNextPhysicsCall(_gravityObject, nextPos);
             nextPos += velocity * Time.fixedDeltaTime;
 
             _lineRenderer.positionCount++;

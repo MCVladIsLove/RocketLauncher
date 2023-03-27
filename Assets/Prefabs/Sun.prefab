@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2752391527869845757}
   - component: {fileID: 2752391527869845756}
   - component: {fileID: -7641506652693236582}
+  - component: {fileID: 4013893170737797367}
   m_Layer: 0
   m_Name: Sun
   m_TagString: Untagged
@@ -106,15 +107,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2752391527869845638}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e64c86c3739baf41ad8d7244025dce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _startForceDirection: {x: 0, y: 0, z: 0}
-  _pullable: 0
   _rotateAroundGameObject: {fileID: 0}
-  _magnetic: 1
 --- !u!54 &2752391527869845756
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -143,6 +142,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cafad018af15faf41a42d2301e6abaf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4013893170737797367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2752391527869845638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a865c717caaff2549941c46afa641e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startForceDirection: {x: 0, y: 0, z: 0}
+  _rotateAroundGameObject: {fileID: 0}
 --- !u!1 &2752391529760725152
 GameObject:
   m_ObjectHideFlags: 0

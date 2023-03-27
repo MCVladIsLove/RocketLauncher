@@ -11,11 +11,9 @@ public class GravityManagement : MonoBehaviour
 
     [SerializeField] float _minDistanceClampBorder = 3; // too low distance causes very high force pulling objects far away
     [SerializeField] float _minDistanceToMagnetize = 1;
-    [SerializeField] float _maxMagnitDistance;
 
     public float MinDistanceClampBorder { get { return _minDistanceClampBorder; } }
     public float MinDistanceToMagnetize { get { return _minDistanceToMagnetize; } }
-    public float MaxMagnitDistance { get { return _maxMagnitDistance; } }
     void Awake()
     {
         if (Instance && Instance != this)
@@ -24,6 +22,13 @@ public class GravityManagement : MonoBehaviour
             Instance = this;
 
         _gravityObjects = new List<GravitySystemObject>();
+    }
+    private void FixedUpdate()
+    {
+        foreach (GravitySystemObject go in _gravityObjects)
+        {
+            go.PullObjects();
+        }
     }
 
     public void Pull(Rigidbody pulled, Rigidbody to)
@@ -38,67 +43,74 @@ public class GravityManagement : MonoBehaviour
         Rigidbody goRb;
         foreach (GravitySystemObject go in _gravityObjects)
         {
-            if (go.gameObject.activeInHierarchy && go.gameObject != pulled.gameObject &&
-                go.Magnetic && GravityManagementUtils.ObjectsCanGravitate(pulled.position, (goRb = go.GetComponent<Rigidbody>()).position))
+            if (go.gameObject.activeInHierarchy && go.gameObject != pulled.gameObject
+                && GravityManagementUtils.ObjectsCanGravitate(pulled.position, (goRb = go.Rigidbody).position))
             {
                 Pull(pulled, goRb);
             }
         }
     }
 
-    public void MagnetizeAll(Rigidbody magnetic)
+    public void MagnetizeAll(Rigidbody magnetic) 
     {
         Rigidbody goRb;
         foreach (GravitySystemObject go in _gravityObjects)
         {
-            if (go.gameObject.activeInHierarchy && go.gameObject != magnetic.gameObject &&
-                go.Pullable && GravityManagementUtils.ObjectsCanGravitate((goRb = go.GetComponent<Rigidbody>()).position, magnetic.position))
+            if (go.gameObject.activeInHierarchy && go.gameObject != magnetic.gameObject
+                && GravityManagementUtils.ObjectsCanGravitate((goRb = go.Rigidbody).position, magnetic.position))
             {
                 Pull(goRb, magnetic);
             }
         }
     }
-    public Vector3 GetVelocityChangeNextPhysicsCall(Rigidbody pulled, Vector3 pulledObjPosNow, Vector3 additionalForce)
+    public Vector3 GetVelocityChangeNextPhysicsCall(GravitySystemObject pulled, Vector3 pulledObjPosNow, Vector3 additionalForce)
     {
         Vector3 resultingVelocity = Vector3.zero;
         Rigidbody goRb;
         foreach (GravitySystemObject go in _gravityObjects)
         {
-            goRb = go.GetComponent<Rigidbody>();
+            goRb = go.Rigidbody;
             if (go.gameObject.activeInHierarchy && go.gameObject != pulled.gameObject && 
-                go.Magnetic && GravityManagementUtils.ObjectsCanGravitate(goRb.position, pulledObjPosNow))
+                GravityManagementUtils.ObjectsCanGravitate(goRb.position, pulledObjPosNow) &&
+                go.CanPullObject(pulled))
             {
                 Vector3 direction = (goRb.position - pulledObjPosNow).normalized;
-                float force = GravityManagementUtils.GetForceBetween(pulledObjPosNow, pulled.mass, goRb.position, goRb.mass, true);
-                resultingVelocity += GravityManagementUtils.GetVelocityFromForce(force, pulled.mass, ForceMode.Force) * direction;
+                float force = GravityManagementUtils.GetForceBetween(pulledObjPosNow, pulled.Rigidbody.mass, goRb.position, goRb.mass, true);
+                resultingVelocity += GravityManagementUtils.GetVelocityFromForce(force, pulled.Rigidbody.mass, ForceMode.Force) * direction;
             }
         }
         
-        return resultingVelocity + GravityManagementUtils.GetVelocityFromForce(additionalForce, pulled.mass, ForceMode.Impulse);
+        return resultingVelocity + GravityManagementUtils.GetVelocityFromForce(additionalForce, pulled.Rigidbody.mass, ForceMode.Impulse);
     }
-    public Vector3 GetVelocityChangeNextPhysicsCall(Rigidbody pulled, Vector3 pulledObjPosNow)
+    public Vector3 GetVelocityChangeNextPhysicsCall(GravitySystemObject pulled, Vector3 pulledObjPosNow)
     {
         Vector3 resultingVelocity = Vector3.zero;
         Rigidbody goRb;
         foreach (GravitySystemObject go in _gravityObjects)
         {
-            goRb = go.GetComponent<Rigidbody>();
+            goRb = go.Rigidbody;
             if (go.gameObject.activeInHierarchy && go.gameObject != pulled.gameObject &&
-                go.Magnetic && GravityManagementUtils.ObjectsCanGravitate(goRb.position, pulledObjPosNow))
+                GravityManagementUtils.ObjectsCanGravitate(goRb.position, pulledObjPosNow) &&
+                go.CanPullObject(pulled))
             {
                 Vector3 direction = (goRb.position - pulledObjPosNow).normalized;
-                float force = GravityManagementUtils.GetForceBetween(pulledObjPosNow, pulled.mass, goRb.position, goRb.mass, true);
-                resultingVelocity += GravityManagementUtils.GetVelocityFromForce(force, pulled.mass, ForceMode.Force) * direction;
+                float force = GravityManagementUtils.GetForceBetween(pulledObjPosNow, pulled.Rigidbody.mass, goRb.position, goRb.mass, true);
+                resultingVelocity += GravityManagementUtils.GetVelocityFromForce(force, pulled.Rigidbody.mass, ForceMode.Force) * direction;
             }
         }
 
         return resultingVelocity;
     }
 
-    public bool RemoveFromGravitySystem(GravitySystemObject gravityObject)
-    {
-        return _gravityObjects.Remove(gravityObject);
-    }
+     public bool RemoveFromGravitySystem(GravitySystemObject gravityObject)
+     {
+        foreach (GravitySystemObject go in _gravityObjects)
+            if (go.CanPullObject(gravityObject))
+                go.RemoveFromPulledObjects(gravityObject);
+
+         return _gravityObjects.Remove(gravityObject); // need to remove objcts from local lists
+     }
+  
     public void AddToGravitySystem(GravitySystemObject gravityObject)
     {
         _gravityObjects.Add(gravityObject);

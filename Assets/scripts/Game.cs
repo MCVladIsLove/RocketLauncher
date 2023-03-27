@@ -19,6 +19,10 @@ public class Game : MonoBehaviour
     [SerializeField] float _minVerticalSpaceBetweenObjects;
     [SerializeField] float _minHorizontalSpaceBetweenObjects;
 
+    [SerializeField] GameObject _player;
+    
+    public GameObject Player { get { return _player; } }
+
     public float BottomPlaySpaceY { get { return _bottomPlaySpaceY; } }
     public float TopPlaySpaceY { get { return _bottomPlaySpaceY + _playSpaceHeight; } }
     public float PlaySpaceHeight { get { return _playSpaceHeight; } }
@@ -26,17 +30,20 @@ public class Game : MonoBehaviour
 
     static public Game Instance { get; private set; }
 
-    void Start()
+    void Awake()
     {
         if (Instance && Instance != this)
             Destroy(this);
         else
             Instance = this;
 
-        _generatorTrigger = FindObjectOfType<GeneratorTrigger>();
-
         _camMovement = CameraInstance.mainCam.GetComponent<CameraMovement>();
         _camToPlaySpaceDistance = Mathf.Abs(CameraInstance.mainCam.transform.position.z);
+    }
+    void Start()
+    {
+
+        _generatorTrigger = FindObjectOfType<GeneratorTrigger>();
 
         _bottomPlaySpaceY = CameraInstance.mainCam.ScreenToWorldPoint(new Vector3(0, 0, _camToPlaySpaceDistance)).y;
         float topY = CameraInstance.mainCam.ScreenToWorldPoint(new Vector3(0, CameraInstance.mainCam.scaledPixelHeight, _camToPlaySpaceDistance)).y;

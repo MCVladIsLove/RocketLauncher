@@ -204,6 +204,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7871542095877333266, guid: 87fbd5a92dc31fa4f874c4fb6d3585e2,
+        type: 3}
+      propertyPath: _canBeFocused
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3269253732100358368, guid: 87fbd5a92dc31fa4f874c4fb6d3585e2,
         type: 3}
       propertyPath: m_Name
@@ -273,6 +278,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7576044959081080764, guid: 932fa6b936523354c85ab9e1ad26be27,
+        type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 619766479}
     - target: {fileID: 7576044959081080764, guid: 932fa6b936523354c85ab9e1ad26be27,
         type: 3}
       propertyPath: _minVerticalSpaceBetweenObjects
@@ -402,6 +412,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &619766479 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2826757361675447592, guid: 04e9489c2c655514d94565350516d39b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1395636084}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &829410119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -409,6 +425,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7871542095877333266, guid: 87fbd5a92dc31fa4f874c4fb6d3585e2,
+        type: 3}
+      propertyPath: _canBeFocused
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3269253732100358368, guid: 87fbd5a92dc31fa4f874c4fb6d3585e2,
         type: 3}
       propertyPath: m_Name
@@ -418,6 +439,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mass
       value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269253732100358370, guid: 87fbd5a92dc31fa4f874c4fb6d3585e2,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 78
       objectReference: {fileID: 0}
     - target: {fileID: 3269253732100358377, guid: 87fbd5a92dc31fa4f874c4fb6d3585e2,
         type: 3}
@@ -818,6 +844,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7871542095877333266, guid: 87fbd5a92dc31fa4f874c4fb6d3585e2,
+        type: 3}
+      propertyPath: _canBeFocused
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3269253732100358368, guid: 87fbd5a92dc31fa4f874c4fb6d3585e2,
         type: 3}
       propertyPath: m_Name

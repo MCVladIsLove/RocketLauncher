@@ -56,7 +56,9 @@ public static class GravityManagementUtils
     public static bool ObjectsCanGravitate(Vector3 first, Vector3 second)
     {
         float distance = Vector3.Distance(first, second);
-        return distance > gravityManager.MinDistanceToMagnetize && distance < gravityManager.MaxMagnitDistance;
+        return distance > gravityManager.MinDistanceToMagnetize;
     }
+
+    //public static Vector3 GetOrbit // TUT
 
 }

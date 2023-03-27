@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2826757361675447595}
   - component: {fileID: 2826757361675447585}
   - component: {fileID: 2826757361675447587}
+  - component: {fileID: -1834678178889289742}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Player
@@ -112,6 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a513ab6134f7b4d963087093cb04d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _forceMultiplier: 0
 --- !u!54 &2826757361675447584
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -135,15 +137,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2826757361675447592}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e64c86c3739baf41ad8d7244025dce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _startForceDirection: {x: 0, y: 0, z: 0}
-  _pullable: 1
   _rotateAroundGameObject: {fileID: 0}
-  _magnetic: 0
 --- !u!120 &2826757361675447585
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -265,3 +265,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _simulateManually: 1
   _stepsToSimulate: 25
+--- !u!114 &-1834678178889289742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2826757361675447592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a865c717caaff2549941c46afa641e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startForceDirection: {x: 0, y: 0, z: 0}
+  _rotateAroundGameObject: {fileID: 0}

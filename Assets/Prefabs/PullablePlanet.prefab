@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7434955976338478791}
   - component: {fileID: 7434955976338478793}
   - component: {fileID: 3018497648405893075}
+  - component: {fileID: 6174951255967855815}
   m_Layer: 0
   m_Name: PullablePlanet
   m_TagString: Untagged
@@ -106,15 +107,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7434955976338478784}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e64c86c3739baf41ad8d7244025dce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _startForceDirection: {x: 0, y: 0, z: 0}
-  _pullable: 1
   _rotateAroundGameObject: {fileID: 0}
-  _magnetic: 0
 --- !u!54 &7434955976338478791
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -156,3 +155,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cafad018af15faf41a42d2301e6abaf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6174951255967855815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434955976338478784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a865c717caaff2549941c46afa641e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startForceDirection: {x: 0, y: 0, z: 0}
+  _rotateAroundGameObject: {fileID: 0}

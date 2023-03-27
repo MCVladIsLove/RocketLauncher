@@ -7,21 +7,23 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Rigidbody))]
 public class GravitySystemObject : MonoBehaviour
 {
-    [SerializeField] Vector3 _startForceDirection;
-    [SerializeField] bool _pullable;
-    [SerializeField] Rigidbody _rotateAroundGameObject;
-    public bool Pullable { get { return _pullable; }
-        set { if (gameObject.GetComponent<Rigidbody>()) _pullable = value; } }
+    [SerializeField] protected Vector3 _startForceDirection;
+    [SerializeField] protected Rigidbody _rotateAroundGameObject;
 
-    [SerializeField] bool _magnetic;
-    public bool Magnetic { get { return _magnetic; } set { _magnetic = value; } }
+    protected GravityManagement _gravityManager;
+    protected Rigidbody _rb;
+    public Rigidbody Rigidbody { get { return _rb; } }
 
-    GravityManagement _gravityManager;
-    Rigidbody _rb;
-    void Start()
+    protected LinkedList<GravitySystemObject> _objectsToPull;
+
+    virtual protected void Start()
     {
         _gravityManager = GravityManagement.Instance;
-        EnableGravitation(_pullable, _magnetic);
+        EnableGravitation();
+    }
+    virtual protected void Awake()
+    {
+        _objectsToPull = new LinkedList<GravitySystemObject>();
         _rb = GetComponent<Rigidbody>();
         if (_rotateAroundGameObject)
         {
@@ -38,24 +40,41 @@ public class GravitySystemObject : MonoBehaviour
             _rb.AddForce(_startForceDirection, ForceMode.Impulse);
     }
 
-    void FixedUpdate()
+    public void PullObjects()
     {
-        if (_magnetic)
-            _gravityManager.MagnetizeAll(_rb);
+        foreach (GravitySystemObject pulled in _objectsToPull)
+        {
+            if (pulled.gameObject.activeInHierarchy && 
+                GravityManagementUtils.ObjectsCanGravitate(pulled.Rigidbody.position, _rb.position))
+            {
+                _gravityManager.Pull(pulled.Rigidbody, _rb);
+            }
+        }
+    }
+
+    public bool CanPullObject(GravitySystemObject go)
+    {
+        return _objectsToPull.Contains(go);
     }
 
     public void DisableGravitation()
     {
         _gravityManager.RemoveFromGravitySystem(this);
-        _pullable = false;
-        _magnetic = false;
     }
 
-    public void EnableGravitation(bool pullable, bool magnetic)
+    public void EnableGravitation()
     {
         _gravityManager.AddToGravitySystem(this);
-        _pullable = pullable;
-        _magnetic = magnetic;
+    }
+
+    public void AddToPulledObjects(GravitySystemObject pulled)
+    {
+        if (pulled != this)
+            _objectsToPull.AddLast(pulled);
+    }
+    public void RemoveFromPulledObjects(GravitySystemObject pulled)
+    {
+        _objectsToPull.Remove(pulled);
     }
 
     void OnDestroy()
