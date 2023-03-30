@@ -24,14 +24,7 @@ public class GravitySystemObject : MonoBehaviour
 
         if (_rotateAroundGameObject)
         {
-            Vector3 perpendicular = (_rotateAroundGameObject.position - _rb.position).normalized;
-            perpendicular = new Vector3(-perpendicular.y, perpendicular.x);
-            perpendicular = Random.Range(0, 2) == 1 ? perpendicular : -perpendicular;
-            float force = GravityManagementUtils.GetForceBetween(_rb, _rotateAroundGameObject, true);
-            float distance = (_rb.position - _rotateAroundGameObject.position).magnitude;
-            float velocity = Mathf.Sqrt(force * distance / _rb.mass);
-            
-            _rb.AddForce(perpendicular * velocity, ForceMode.VelocityChange);
+            _rb.AddForce(GravityManagementUtils.GetOrbitalVelocity(_rotateAroundGameObject, _rb), ForceMode.VelocityChange);
         }
         else
             _rb.AddForce(_startForceDirection, ForceMode.Impulse);

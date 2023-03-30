@@ -59,6 +59,15 @@ public static class GravityManagementUtils
         return distance > gravityManager.MinDistanceToMagnetize;
     }
 
-    //public static Vector3 GetOrbit // TUT
+    public static Vector3 GetOrbitalVelocity(Rigidbody rotateAroundGameObject, Rigidbody rotatingObj)
+    {
+        Vector3 perpendicular = (rotateAroundGameObject.position - rotatingObj.position).normalized;
+        perpendicular = new Vector3(-perpendicular.y, perpendicular.x);
+        perpendicular = Random.Range(0, 2) == 1 ? perpendicular : -perpendicular;
+        float force = GravityManagementUtils.GetForceBetween(rotatingObj, rotateAroundGameObject, true);
+        float distance = (rotatingObj.position - rotateAroundGameObject.position).magnitude;
+        float velocity = Mathf.Sqrt(force * distance / rotatingObj.mass);
+        return perpendicular * velocity;
+    }
 
 }
