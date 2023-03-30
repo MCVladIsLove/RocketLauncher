@@ -53,7 +53,6 @@ public class GravitySystemObject : MonoBehaviour
         {
             pos += (tmp.transform.lossyScale.y / 2 + rotating.transform.lossyScale.y / 2 * 1.8f) * Vector3.up;
             tmp = Instantiate(rotating, pos, Quaternion.identity);
-
             tmp._rotateAroundGameObject = _rb;
 
             AddToPulledObjects(tmp);

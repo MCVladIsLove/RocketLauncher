@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2752391527869845755}
   - component: {fileID: 2752391527869845752}
   - component: {fileID: 2752391527869845753}
-  - component: {fileID: 2752391527869845757}
   - component: {fileID: 2752391527869845756}
   - component: {fileID: -7641506652693236582}
   - component: {fileID: 4013893170737797367}
@@ -100,20 +99,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2752391527869845757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2752391527869845638}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e64c86c3739baf41ad8d7244025dce1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _startForceDirection: {x: 0, y: 0, z: 0}
-  _rotateAroundGameObject: {fileID: 0}
 --- !u!54 &2752391527869845756
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -156,6 +141,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startForceDirection: {x: 0, y: 0, z: 0}
   _rotateAroundGameObject: {fileID: 0}
+  _rotatingObjects:
+  - {fileID: 6174951255967855815, guid: 8939a994bd39a6e4689b9a1ee1c2d4fe, type: 3}
+  - {fileID: 6174951255967855815, guid: 8939a994bd39a6e4689b9a1ee1c2d4fe, type: 3}
 --- !u!1 &2752391529760725152
 GameObject:
   m_ObjectHideFlags: 0

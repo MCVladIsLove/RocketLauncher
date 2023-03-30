@@ -35,7 +35,6 @@ public class LevelGenerator
     GameObject CreateLevelObject(GameObject prefab, Vector3 position)
     {
         GameObject instance = GameObject.Instantiate(prefab, position, Quaternion.identity);
-        Game.Instance.AddLevelObject(instance.GetComponent<CreatableDestroyable>());
         return instance;
     }
     GameObject CreateLevelObject(GameObject prefab, Vector3 position, bool checkIntersection)
@@ -47,7 +46,6 @@ public class LevelGenerator
             GameObject.Destroy(instance);
             return null;
         }
-        Game.Instance.AddLevelObject(instance.GetComponent<CreatableDestroyable>()); 
         return instance;
     }
 

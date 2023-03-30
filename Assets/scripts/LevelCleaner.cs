@@ -16,7 +16,6 @@ public class LevelCleaner
     {
         foreach (CreatableDestroyable cd in _destroyableObjects.Select(x => x).Where(x => IsOutOfBounds(x.transform.position)).ToList())
         {
-            _destroyableObjects.Remove(cd);
             cd.RemoveObject();
         }
     }

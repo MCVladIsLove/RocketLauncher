@@ -39,6 +39,7 @@ public class Game : MonoBehaviour
 
         _camMovement = CameraInstance.mainCam.GetComponent<CameraMovement>();
         _camToPlaySpaceDistance = Mathf.Abs(CameraInstance.mainCam.transform.position.z);
+        _levelObjects = new List<CreatableDestroyable>();
     }
     void Start()
     {
@@ -50,7 +51,6 @@ public class Game : MonoBehaviour
         _playSpaceHeight = topY - _bottomPlaySpaceY;
         _playSpaceWidth = CameraInstance.mainCam.ScreenToWorldPoint(new Vector3(CameraInstance.mainCam.scaledPixelWidth, 0, _camToPlaySpaceDistance)).x - CameraInstance.mainCam.ScreenToWorldPoint(new Vector3(0, 0, _camToPlaySpaceDistance)).x;
 
-        _levelObjects = GetLevelObjects();
         _lvlCleaner = new LevelCleaner(_levelObjects);
         _lvlGenerator = new LevelGenerator(_minVerticalSpaceBetweenObjects, _minHorizontalSpaceBetweenObjects, _camMovement);
 
