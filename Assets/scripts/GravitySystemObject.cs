@@ -15,16 +15,13 @@ public class GravitySystemObject : MonoBehaviour
     public Rigidbody Rigidbody { get { return _rb; } }
 
     protected LinkedList<GravitySystemObject> _objectsToPull;
+    [SerializeField] protected List<GravitySystemObject> _rotatingObjects;
 
     virtual protected void Start()
     {
         _gravityManager = GravityManagement.Instance;
         EnableGravitation();
-    }
-    virtual protected void Awake()
-    {
-        _objectsToPull = new LinkedList<GravitySystemObject>();
-        _rb = GetComponent<Rigidbody>();
+
         if (_rotateAroundGameObject)
         {
             Vector3 perpendicular = (_rotateAroundGameObject.position - _rb.position).normalized;
@@ -33,13 +30,35 @@ public class GravitySystemObject : MonoBehaviour
             float force = GravityManagementUtils.GetForceBetween(_rb, _rotateAroundGameObject, true);
             float distance = (_rb.position - _rotateAroundGameObject.position).magnitude;
             float velocity = Mathf.Sqrt(force * distance / _rb.mass);
-
+            
             _rb.AddForce(perpendicular * velocity, ForceMode.VelocityChange);
         }
         else
             _rb.AddForce(_startForceDirection, ForceMode.Impulse);
+        // here
+    }
+    virtual protected void Awake()
+    {
+        _objectsToPull = new LinkedList<GravitySystemObject>();
+        _rb = GetComponent<Rigidbody>();
+
+        SpawnRotatingObjects();
     }
 
+    virtual protected void SpawnRotatingObjects()
+    {
+        GravitySystemObject tmp = this;
+        Vector3 pos = this.transform.position;
+        foreach (GravitySystemObject rotating in _rotatingObjects)
+        {
+            pos += (tmp.transform.lossyScale.y / 2 + rotating.transform.lossyScale.y / 2 * 1.8f) * Vector3.up;
+            tmp = Instantiate(rotating, pos, Quaternion.identity);
+
+            tmp._rotateAroundGameObject = _rb;
+
+            AddToPulledObjects(tmp);
+        }
+    }
     public void PullObjects()
     {
         foreach (GravitySystemObject pulled in _objectsToPull)
