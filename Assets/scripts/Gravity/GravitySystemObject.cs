@@ -23,12 +23,9 @@ public class GravitySystemObject : MonoBehaviour
         EnableGravitation();
 
         if (_rotateAroundGameObject)
-        {
             _rb.AddForce(GravityManagementUtils.GetOrbitalVelocity(_rotateAroundGameObject, _rb), ForceMode.VelocityChange);
-        }
         else
             _rb.AddForce(_startForceDirection, ForceMode.Impulse);
-        // here
     }
     virtual protected void Awake()
     {

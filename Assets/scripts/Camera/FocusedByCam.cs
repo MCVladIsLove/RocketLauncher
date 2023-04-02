@@ -7,7 +7,6 @@ public class FocusedByCam : MonoBehaviour
     [SerializeField] bool _canBeFocused = false;
     public bool CanBeFocused { get { return _canBeFocused; } set { _canBeFocused = value; } }
     
-    CameraMovement _camMovement;
     private void OnCollisionEnter(Collision collision)
     {
         if (_canBeFocused && collision.gameObject.tag == "Player")
