@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class Level : ScriptableObject
+public class Level : MonoBehaviour
 {
-    [SerializeField] GameObject[] _leftZoneObjects;
-    [SerializeField] GameObject[] _rightZoneObjects;
-    [SerializeField] GameObject[] _middleZoneObjects;
-    public GameObject[] MiddleZoneObjects { get { return _middleZoneObjects; } }
-    public GameObject[] LeftZoneObjects { get { return _leftZoneObjects; } }
-    public GameObject[] RightZoneObjects { get { return _rightZoneObjects; } }
+    [SerializeField] Transform _highestObject;
+    Vector3 _aboveTopObject;
+
+    public Vector3 AboveTopObject { get { return _aboveTopObject; } }
+
+    private void Awake()
+    {
+        _aboveTopObject = new Vector3(_highestObject.position.x, _highestObject.position.y + _highestObject.lossyScale.y / 2, 0);
+    }
+    
 }

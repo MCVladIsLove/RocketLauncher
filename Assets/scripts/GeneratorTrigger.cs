@@ -4,20 +4,17 @@ using UnityEngine;
 
 public class GeneratorTrigger : MonoBehaviour
 {
-    BoxCollider _collider;
-    private void Start()
+    public void Start()
     {
-        _collider = GetComponent<BoxCollider>();
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-
-        if (other.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && enabled)
         {
             Game.Instance.CallGenerator();
+            enabled = false;
         }
     }
-
     public void MoveTo(Vector3 newPosition)
     {
         transform.position = newPosition;

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2752391527869845752}
   - component: {fileID: 2752391527869845753}
   - component: {fileID: 2752391527869845756}
-  - component: {fileID: -7641506652693236582}
   - component: {fileID: 4013893170737797367}
   m_Layer: 0
   m_Name: Sun
@@ -115,18 +114,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-7641506652693236582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2752391527869845638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cafad018af15faf41a42d2301e6abaf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4013893170737797367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,9 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startForceDirection: {x: 0, y: 0, z: 0}
   _rotateAroundGameObject: {fileID: 0}
-  _rotatingObjects:
-  - {fileID: 6174951255967855815, guid: 8939a994bd39a6e4689b9a1ee1c2d4fe, type: 3}
-  - {fileID: 6174951255967855815, guid: 8939a994bd39a6e4689b9a1ee1c2d4fe, type: 3}
+  _rotatingObjects: []
 --- !u!1 &2752391529760725152
 GameObject:
   m_ObjectHideFlags: 0

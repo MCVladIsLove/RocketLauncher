@@ -5,24 +5,26 @@ using System.Linq;
 
 public class LevelCleaner
 {
-    List<CreatableDestroyable> _destroyableObjects;
+    LinkedList<Level> _levels;
+    int _levelsExistAtTheSameTime;
 
-    public LevelCleaner(List<CreatableDestroyable> destroyableObjects)
-    {        
-        _destroyableObjects = destroyableObjects;
+    public LevelCleaner(LinkedList<Level> levels, int maxLevelsToExistAtTheSameTime)
+    {
+        _levels = levels;
+        _levelsExistAtTheSameTime = maxLevelsToExistAtTheSameTime;
     }
 
-    public void Update()
+    public void Clean()
     {
-        foreach (CreatableDestroyable cd in _destroyableObjects.Select(x => x).Where(x => IsOutOfBounds(x.transform.position)).ToList())
+        if (MoreLvlsThanMax())
         {
-            cd.RemoveObject();
+            GameObject.Destroy(_levels.First.Value.gameObject, 0.5f);
+            _levels.RemoveFirst();
         }
     }
 
-    bool IsOutOfBounds(Vector3 objectPos)
+    bool MoreLvlsThanMax()
     {
-        return objectPos.y < Game.Instance.BottomPlaySpaceY - Game.Instance.PlaySpaceHeight;
+        return _levels.Count > _levelsExistAtTheSameTime;
     }
-
 }

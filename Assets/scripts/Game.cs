@@ -4,30 +4,14 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
-    List<CreatableDestroyable> _levelObjects;
-    LevelCleaner _lvlCleaner;
     LevelGenerator _lvlGenerator;
-    CameraMovement _camMovement;
-    Transform _highestPlanet;
-    GeneratorTrigger _generatorTrigger;
-
-    float _bottomPlaySpaceY;
-    float _playSpaceHeight;
-    float _playSpaceWidth;
-    float _camToPlaySpaceDistance;
-
-    [SerializeField] float _minVerticalSpaceBetweenObjects;
-    [SerializeField] float _minHorizontalSpaceBetweenObjects;
+    LevelCleaner _lvlCleaner;
+    LinkedList<Level> _levels;
+    [SerializeField] int _levelsExistAtTheSameTime;
 
     [SerializeField] GameObject _player;
     
-    public GameObject Player { get { return _player; } }
-
-    public float BottomPlaySpaceY { get { return _bottomPlaySpaceY; } }
-    public float TopPlaySpaceY { get { return _bottomPlaySpaceY + _playSpaceHeight; } }
-    public float PlaySpaceHeight { get { return _playSpaceHeight; } }
-    public float PlaySpaceWidth { get { return _playSpaceWidth; } }
-
+    public GameObject Player { get { return _player; } set { _player = value; } }
     static public Game Instance { get; private set; }
 
     void Awake()
@@ -37,66 +21,21 @@ public class Game : MonoBehaviour
         else
             Instance = this;
 
-        _camMovement = CameraInstance.mainCam.GetComponent<CameraMovement>();
-        _camToPlaySpaceDistance = Mathf.Abs(CameraInstance.mainCam.transform.position.z);
-        _levelObjects = new List<CreatableDestroyable>();
-    }
-    void Start()
-    {
-
-        _generatorTrigger = FindObjectOfType<GeneratorTrigger>();
-
-        _bottomPlaySpaceY = CameraInstance.mainCam.ScreenToWorldPoint(new Vector3(0, 0, _camToPlaySpaceDistance)).y;
-        float topY = CameraInstance.mainCam.ScreenToWorldPoint(new Vector3(0, CameraInstance.mainCam.scaledPixelHeight, _camToPlaySpaceDistance)).y;
-        _playSpaceHeight = topY - _bottomPlaySpaceY;
-        _playSpaceWidth = CameraInstance.mainCam.ScreenToWorldPoint(new Vector3(CameraInstance.mainCam.scaledPixelWidth, 0, _camToPlaySpaceDistance)).x - CameraInstance.mainCam.ScreenToWorldPoint(new Vector3(0, 0, _camToPlaySpaceDistance)).x;
-
-        _lvlCleaner = new LevelCleaner(_levelObjects);
-        _lvlGenerator = new LevelGenerator(_minVerticalSpaceBetweenObjects, _minHorizontalSpaceBetweenObjects, _camMovement);
-
-        _highestPlanet = GetHighestPlanet();
-        _highestPlanet.GetComponent<FocusedByCam>().AllowFocus();
-    }
-
-    void Update()
-    {
-        _bottomPlaySpaceY += _camMovement.PositionChange.y;
-        _lvlCleaner.Update();
-    }
-
-    List<CreatableDestroyable> GetLevelObjects()
-    {
-        return new List<CreatableDestroyable>(FindObjectsOfType<CreatableDestroyable>());
+        _levels = new LinkedList<Level>();
+        _lvlGenerator = new LevelGenerator();
+        _lvlCleaner = new LevelCleaner(_levels, _levelsExistAtTheSameTime);
+        AddLevel(_lvlGenerator.GenerateStartLevel());
+        CallGenerator();
     }
 
     public void CallGenerator()
     {
-        Vector3 newGeneratorPosition = _highestPlanet.transform.position - Vector3.up * _highestPlanet.transform.lossyScale.y;
-        _generatorTrigger.MoveTo(newGeneratorPosition);
-        _highestPlanet = _lvlGenerator.GenerateLevel(_highestPlanet);
-        _highestPlanet.GetComponent<FocusedByCam>().AllowFocus();
+        AddLevel(_lvlGenerator.GenerateLevel(_levels.Last.Value));
+        _lvlCleaner.Clean();
     }
-
-    private Transform GetHighestPlanet()
+    void AddLevel(Level level)
     {
-        if (_levelObjects.Count < 0)
-            return null;
-
-        GameObject highest = _levelObjects[0].gameObject;
-        foreach (CreatableDestroyable cd in _levelObjects)
-            if (cd.transform.position.y > highest.transform.position.y)
-                highest = cd.gameObject;
-
-        return highest.transform;
-    }
-
-    public void AddLevelObject(CreatableDestroyable obj)
-    {
-        _levelObjects.Add(obj);
-    }
-    public void RemoveLevelObject(CreatableDestroyable obj)
-    {
-        _levelObjects.Remove(obj);
+        _levels.AddLast(level);
     }
 }
 
