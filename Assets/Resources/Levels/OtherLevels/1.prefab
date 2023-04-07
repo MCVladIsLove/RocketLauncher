@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 4155989255975069231}
   - component: {fileID: 7072954505489999581}
   m_Layer: 0
-  m_Name: lvl
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,12 +84,12 @@ PrefabInstance:
     - target: {fileID: 3269253732100358377, guid: 87fbd5a92dc31fa4f874c4fb6d3585e2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.3
+      value: -6.2
       objectReference: {fileID: 0}
     - target: {fileID: 3269253732100358377, guid: 87fbd5a92dc31fa4f874c4fb6d3585e2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 33
+      value: 32.3
       objectReference: {fileID: 0}
     - target: {fileID: 3269253732100358377, guid: 87fbd5a92dc31fa4f874c4fb6d3585e2,
         type: 3}
@@ -170,7 +170,7 @@ PrefabInstance:
     - target: {fileID: 2752391527869845754, guid: 530f5d590717d9b4396f65364f91c71c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 19.3
+      value: 15.3
       objectReference: {fileID: 0}
     - target: {fileID: 2752391527869845754, guid: 530f5d590717d9b4396f65364f91c71c,
         type: 3}
@@ -266,12 +266,12 @@ PrefabInstance:
     - target: {fileID: 7434955976338478794, guid: 8939a994bd39a6e4689b9a1ee1c2d4fe,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.7
+      value: -0.8
       objectReference: {fileID: 0}
     - target: {fileID: 7434955976338478794, guid: 8939a994bd39a6e4689b9a1ee1c2d4fe,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 16
+      value: 7.1
       objectReference: {fileID: 0}
     - target: {fileID: 7434955976338478794, guid: 8939a994bd39a6e4689b9a1ee1c2d4fe,
         type: 3}

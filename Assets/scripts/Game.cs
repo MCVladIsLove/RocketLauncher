@@ -26,6 +26,7 @@ public class Game : MonoBehaviour
         _lvlCleaner = new LevelCleaner(_levels, _levelsExistAtTheSameTime);
         AddLevel(_lvlGenerator.GenerateStartLevel());
         CallGenerator();
+        CallGenerator();
     }
 
     public void CallGenerator()
