@@ -15,8 +15,4 @@ public class GeneratorTrigger : MonoBehaviour
             enabled = false;
         }
     }
-    public void MoveTo(Vector3 newPosition)
-    {
-        transform.position = newPosition;
-    }
 }

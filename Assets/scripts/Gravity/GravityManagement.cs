@@ -108,7 +108,7 @@ public class GravityManagement : MonoBehaviour
             if (go.CanPullObject(gravityObject))
                 go.RemoveFromPulledObjects(gravityObject);
 
-         return _gravityObjects.Remove(gravityObject); // need to remove objcts from local lists
+         return _gravityObjects.Remove(gravityObject); 
      }
   
     public void AddToGravitySystem(GravitySystemObject gravityObject)

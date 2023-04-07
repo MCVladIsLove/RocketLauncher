@@ -15,7 +15,7 @@ public class GravitySystemObject : MonoBehaviour
     public Rigidbody Rigidbody { get { return _rb; } }
 
     protected LinkedList<GravitySystemObject> _objectsToPull;
-    [SerializeField] protected List<GravitySystemObject> _rotatingObjects;
+    [SerializeField] protected List<GravitySystemObject> _addToPulledOnStart;
 
     virtual protected void Start()
     {
@@ -32,21 +32,13 @@ public class GravitySystemObject : MonoBehaviour
         _objectsToPull = new LinkedList<GravitySystemObject>();
         _rb = GetComponent<Rigidbody>();
 
-        SpawnRotatingObjects();
+        FillInitialPulledList();
     }
 
-    virtual protected void SpawnRotatingObjects()
+    virtual protected void FillInitialPulledList()
     {
-        GravitySystemObject tmp = this;
-        Vector3 pos = this.transform.position;
-        foreach (GravitySystemObject rotating in _rotatingObjects)
-        {
-            pos += (tmp.transform.lossyScale.y / 2 + rotating.transform.lossyScale.y / 2 * 1.8f) * Vector3.up;
-            tmp = Instantiate(rotating, pos, Quaternion.identity);
-            tmp._rotateAroundGameObject = _rb;
-
-            AddToPulledObjects(tmp);
-        }
+        foreach (GravitySystemObject pulled in _addToPulledOnStart)
+            AddToPulledObjects(pulled);
     }
     public void PullObjects()
     {
