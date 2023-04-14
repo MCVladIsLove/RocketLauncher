@@ -7,9 +7,9 @@ public class GeneratorTrigger : MonoBehaviour
     public void Start()
     {
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Player" && enabled)
+        if (other.gameObject.tag == "Player" && enabled)
         {
             Game.Instance.CallGenerator();
             enabled = false;

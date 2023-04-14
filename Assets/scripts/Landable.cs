@@ -6,17 +6,33 @@ public class Landable : MonoBehaviour
 {
     [SerializeField] GameObject _attached;
     Rigidbody _attachedRb;
+    Rigidbody _rb;
     RigidbodyConstraints _nativeFreeze;
-    private void OnCollisionEnter(Collision collision)
+    Collider _collider;
+    Collider _attachedCollider;
+
+    private void Awake()
     {
-        if (collision.gameObject.tag == "Player" && !_attached)
+        _collider = GetComponent<Collider>();
+        _rb = GetComponent<Rigidbody>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player" && !_attached)
         {
-            _attached = collision.gameObject;
+            _attached = other.gameObject;
             if (_attached.GetComponentInParent<Landable>())
             {
                 _attached = null;
                 return;
-            }
+            }           
+            
+           /* _attachedCollider = other;
+            Vector3 vec = _collider.ClosestPoint(other.bounds.center);
+            Debug.Log(vec);
+            //other.attachedRigidbody.MovePosition(vec);
+            other.transform.position.Set(vec.x, vec.y, 0);*/ // HERE CHANGE TO MAKE PROPER POSITIONING AFTER COLLISION
 
             Vector3 directionLandingToOtherGo = _attached.transform.position - transform.position;
             transform.up = directionLandingToOtherGo;
@@ -27,6 +43,7 @@ public class Landable : MonoBehaviour
             _attached.transform.up = directionLandingToOtherGo;
         }
     }
+   
     public void Release()
     {
         _attachedRb.constraints = _nativeFreeze;
