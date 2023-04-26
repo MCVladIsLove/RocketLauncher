@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: black_hole
-  m_Shader: {fileID: -6465566751694194690, guid: 5fdc42c03a4d9414f87c9b888ae46111,
+  m_Shader: {fileID: -6465566751694194690, guid: 0e6215fbb2cc2534bb9c8aae5b4637bb,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -24,6 +24,10 @@ Material:
         m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Triplanar_45e4a8c90b1d4cb7be4eeba4da7fad8b_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 0d0eb302795d30b43ba36a10ead76dbe, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -37,8 +41,16 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_3d24e2657bf945c291bc0bed79df9488: 3.62
+    - Vector1_3e115676781e461298eaafd2ae343670: 1.41
+    - Vector1_6099251e8efc4e6daf8d4a4a6fea18d6: 0.015
+    - Vector1_93c7e4f1590e4c81a39e1e01bd04080d: 0.8
     - Vector1_b7d021f2b3bf41e79c24f19102ff6166: 1
-    - Vector1_bf6a9c1393ad49318a915f506e234c09: 0.86
-    - Vector1_e75fe49c448a43cda6b54bc9726b2953: -0.6
-    m_Colors: []
+    - Vector1_bf6a9c1393ad49318a915f506e234c09: 0.66
+    - Vector1_e75fe49c448a43cda6b54bc9726b2953: -0.34
+    m_Colors:
+    - Vector2_39f9cd6557e84ec38d6c2a9165a5a492: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - Vector2_9154e9fcc5da4e07b4afc00c33437f3e: {r: 3.9, g: 8.87, b: 0.22, a: -8.33}
+    - Vector2_ef580a247cb64cd4933e2112478a0b89: {r: 0, g: 0, b: 0, a: 0}
+    - Vector3_4971d67c5d0e427db4a1754a01c2bd1f: {r: 1, g: 1, b: 0.47, a: 0}
   m_BuildTextureStacks: []
