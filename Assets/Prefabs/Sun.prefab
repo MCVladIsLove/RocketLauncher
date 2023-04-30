@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2752391527869845753}
   - component: {fileID: 2752391527869845756}
   - component: {fileID: 4013893170737797367}
+  - component: {fileID: 7693472841639268738}
   m_Layer: 0
   m_Name: Sun
   m_TagString: Untagged
@@ -129,6 +130,19 @@ MonoBehaviour:
   _startForceDirection: {x: 0, y: 0, z: 0}
   _rotateAroundGameObject: {fileID: 0}
   _addToPulledOnStart: []
+--- !u!114 &7693472841639268738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2752391527869845638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1251ef29795686141b7fb636862dad7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 0
 --- !u!1 &2752391529760725152
 GameObject:
   m_ObjectHideFlags: 0

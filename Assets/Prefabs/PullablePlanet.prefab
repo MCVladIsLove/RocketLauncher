@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7434955976338478791}
   - component: {fileID: 7434955976338478793}
   - component: {fileID: 6174951255967855815}
+  - component: {fileID: 1603161307100404318}
   m_Layer: 0
   m_Name: PullablePlanet
   m_TagString: Untagged
@@ -142,3 +143,16 @@ MonoBehaviour:
   _startForceDirection: {x: 0, y: 0, z: 0}
   _rotateAroundGameObject: {fileID: 0}
   _addToPulledOnStart: []
+--- !u!114 &1603161307100404318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434955976338478784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1251ef29795686141b7fb636862dad7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 4
