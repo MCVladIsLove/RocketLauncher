@@ -8,5 +8,10 @@ public static class HitTriggerFunctions
     {
         GameObject.Destroy(other.gameObject);
     }
+    static public void LittlePlanetHitPlayer(HitTrigger thisHit, HitTrigger other)
+    {
+        GameObject.Destroy(thisHit.gameObject);
+        Player.Instance.TakeDamage(thisHit.Damage);
+    }
 
 }

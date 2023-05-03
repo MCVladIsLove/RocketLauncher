@@ -13,5 +13,6 @@ public static class HitPairsDictionary
         hitPairAction.Add(new KeyValuePair<HitType, HitType>(HitType.Sun, HitType.Sun), HitTriggerFunctions.SunHitBurn);
         hitPairAction.Add(new KeyValuePair<HitType, HitType>(HitType.Sun, HitType.Planet), HitTriggerFunctions.SunHitBurn);
         hitPairAction.Add(new KeyValuePair<HitType, HitType>(HitType.Sun, HitType.LittlePlanet), HitTriggerFunctions.SunHitBurn);
+        hitPairAction.Add(new KeyValuePair<HitType, HitType>(HitType.LittlePlanet, HitType.Player), HitTriggerFunctions.LittlePlanetHitPlayer);
     }
 }

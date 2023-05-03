@@ -11,7 +11,7 @@ public class GeneratorTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && enabled)
         {
-            Game.Instance.CallGenerator();
+            LevelManager.Instance.CallGenerator();
             enabled = false;
         }
     }

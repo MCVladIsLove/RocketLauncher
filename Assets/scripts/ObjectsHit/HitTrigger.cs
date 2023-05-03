@@ -6,8 +6,10 @@ using System;
 public class HitTrigger : MonoBehaviour
 {
     [SerializeField] protected HitType _type;
+    [SerializeField] int _damage;
     Action<HitTrigger, HitTrigger> _action;
     public HitType Type { get { return _type; } }
+    public int Damage { get { return _damage; } }
 
     private void OnTriggerEnter(Collider other)
     {

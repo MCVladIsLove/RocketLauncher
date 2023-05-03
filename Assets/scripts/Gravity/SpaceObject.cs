@@ -7,6 +7,6 @@ public class SpaceObject : GravitySystemObject
     protected override void Start()
     {
         base.Start();
-        AddToPulledObjects(Game.Instance.Player.GetComponent<GravitySystemObject>());
+        AddToPulledObjects(Player.Instance.GetComponent<GravitySystemObject>());
     }
 }
