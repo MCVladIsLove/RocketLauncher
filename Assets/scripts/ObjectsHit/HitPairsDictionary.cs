@@ -11,8 +11,10 @@ public static class HitPairsDictionary
     {
         hitPairAction = new Dictionary<KeyValuePair<HitType, HitType>, Action<HitTrigger, HitTrigger>>();
         hitPairAction.Add(new KeyValuePair<HitType, HitType>(HitType.Sun, HitType.Sun), HitTriggerFunctions.SunHitBurn);
+        hitPairAction.Add(new KeyValuePair<HitType, HitType>(HitType.Sun, HitType.Player), HitTriggerFunctions.SunHitBurn);
         hitPairAction.Add(new KeyValuePair<HitType, HitType>(HitType.Sun, HitType.Planet), HitTriggerFunctions.SunHitBurn);
         hitPairAction.Add(new KeyValuePair<HitType, HitType>(HitType.Sun, HitType.LittlePlanet), HitTriggerFunctions.SunHitBurn);
         hitPairAction.Add(new KeyValuePair<HitType, HitType>(HitType.LittlePlanet, HitType.Player), HitTriggerFunctions.LittlePlanetHitPlayer);
+        hitPairAction.Add(new KeyValuePair<HitType, HitType>(HitType.Portal, HitType.Player), HitTriggerFunctions.PortalHitSomething);
     }
 }

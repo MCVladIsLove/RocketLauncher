@@ -197,42 +197,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a02dd8d592cf5e64881bbe63906e9dec, type: 3}
---- !u!1001 &245890197
+--- !u!1001 &620687348
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7576044959081080764, guid: 932fa6b936523354c85ab9e1ad26be27,
-        type: 3}
-      propertyPath: _player
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7576044959081080764, guid: 932fa6b936523354c85ab9e1ad26be27,
-        type: 3}
-      propertyPath: _levelsExistAtTheSameTime
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7576044959081080764, guid: 932fa6b936523354c85ab9e1ad26be27,
-        type: 3}
-      propertyPath: _minVerticalSpaceBetweenObjects
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7576044959081080764, guid: 932fa6b936523354c85ab9e1ad26be27,
-        type: 3}
-      propertyPath: _minHorizontalSpaceBetweenObjects
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 7576044959081080765, guid: 932fa6b936523354c85ab9e1ad26be27,
         type: 3}
       propertyPath: m_Name
-      value: GameManager
+      value: LevelManager
       objectReference: {fileID: 0}
     - target: {fileID: 7576044959081080767, guid: 932fa6b936523354c85ab9e1ad26be27,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7576044959081080767, guid: 932fa6b936523354c85ab9e1ad26be27,
         type: 3}
@@ -611,7 +591,7 @@ PrefabInstance:
     - target: {fileID: 8781492586051754924, guid: 7702ac546852e8c4baec68ae5678890f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8781492586051754924, guid: 7702ac546852e8c4baec68ae5678890f,
         type: 3}

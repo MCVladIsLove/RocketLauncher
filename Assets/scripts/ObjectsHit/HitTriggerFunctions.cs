@@ -14,4 +14,10 @@ public static class HitTriggerFunctions
         Player.Instance.TakeDamage(thisHit.Damage);
     }
 
+    static public void PortalHitSomething(HitTrigger thisHit, HitTrigger other)
+    {
+        Portal portal = (Portal)thisHit.AssociatedComponent;
+        portal.Teleport(other.gameObject);
+    }
+
 }

@@ -8,5 +8,6 @@ public enum HitType
     BlackHole,
     Player,
     Planet,
-    LittlePlanet
+    LittlePlanet,
+    Portal
 }

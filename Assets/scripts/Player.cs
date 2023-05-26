@@ -27,4 +27,10 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Death");
     }
+
+    private void OnDestroy()
+    {
+        // game over logic
+        Debug.Log("Game OVER");
+    }
 }
