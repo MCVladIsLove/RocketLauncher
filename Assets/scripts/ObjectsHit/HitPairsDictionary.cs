@@ -16,5 +16,8 @@ public static class HitPairsDictionary
         hitPairAction.Add(new KeyValuePair<HitType, HitType>(HitType.Sun, HitType.LittlePlanet), HitTriggerFunctions.SunHitBurn);
         hitPairAction.Add(new KeyValuePair<HitType, HitType>(HitType.LittlePlanet, HitType.Player), HitTriggerFunctions.LittlePlanetHitPlayer);
         hitPairAction.Add(new KeyValuePair<HitType, HitType>(HitType.Portal, HitType.Player), HitTriggerFunctions.PortalHitSomething);
+        //hitPairAction.Add(new KeyValuePair<HitType, HitType>(HitType.Portal, HitType.Star), HitTriggerFunctions.PortalHitSomething);
+        //У star пока нет Rigidbody, поэтому не работает. Напоминание для будущего...
+        hitPairAction.Add(new KeyValuePair<HitType, HitType>(HitType.Star, HitType.Player), HitTriggerFunctions.StarHitPlayer);
     }
 }

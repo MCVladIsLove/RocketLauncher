@@ -9,5 +9,6 @@ public enum HitType
     Player,
     Planet,
     LittlePlanet,
-    Portal
+    Portal,
+    Star
 }

@@ -6,8 +6,11 @@ public class Player : MonoBehaviour
 {
     static public Player Instance { get; private set; }
 
-    int _coinsCount = 0;
+    int _starsCount = 0;
     int _hp = 100;
+
+    public int StarsCount { get { return _starsCount; } set { _starsCount = value; } }
+
     void Awake()
     {
         if (Instance && Instance != this)

@@ -20,4 +20,10 @@ public static class HitTriggerFunctions
         portal.Teleport(other.gameObject);
     }
 
+    static public void StarHitPlayer(HitTrigger thisHit, HitTrigger other)
+    {
+        GameObject.Destroy(thisHit.gameObject);
+        Player.Instance.StarsCount += 1;
+    }
+
 }
