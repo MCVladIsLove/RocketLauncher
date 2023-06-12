@@ -43,7 +43,7 @@ public class Landable : MonoBehaviour
             _attached.transform.up = directionLandingToOtherGo;
         }
     }
-   
+
     public void Release()
     {
         _attachedRb.constraints = _nativeFreeze;

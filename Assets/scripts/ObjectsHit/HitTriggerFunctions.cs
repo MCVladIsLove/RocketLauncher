@@ -6,7 +6,7 @@ public static class HitTriggerFunctions
 {
     static public void SunHitBurn(HitTrigger thisHit, HitTrigger other)
     {
-        GameObject.Destroy(other.gameObject);
+        //GameObject.Destroy(other.gameObject);
     }
     static public void LittlePlanetHitPlayer(HitTrigger thisHit, HitTrigger other)
     {
