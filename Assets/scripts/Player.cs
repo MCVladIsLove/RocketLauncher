@@ -20,8 +20,8 @@ public class Player : MonoBehaviour
     {
         _hp -= damageAmount;
         Debug.Log(_hp);
-        if (_hp <= 0)
-            Die();
+       // if (_hp <= 0)
+           // Die();
     }
     public void Die()
     {
